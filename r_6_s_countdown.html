@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rainbow Six Siege Season Countdown</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #111;
+      color: white;
+      margin: 0;
+      padding: 0;
+      transition: background-image 0.5s ease-in-out;
+      background-size: cover;
+      background-position: center;
+    }
+    h1 {
+      margin-top: 30px;
+      font-size: 2.5rem;
+    }
+    #countdown {
+      font-size: 2rem;
+      margin: 20px 0;
+      color: #00e5ff;
+    }
+    .operator-select {
+      margin: 20px;
+      font-size: 1rem;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rainbow Six Siege New Season Countdown</h1>
+  <div id="countdown">Loading...</div>
+
+  <label for="operator">Choose your favorite Operator:</label>
+  <select id="operator" class="operator-select">
+    <option value="">--Select--</option>
+    <option value="ash">Ash</option>
+    <option value="sledge">Sledge</option>
+    <option value="thermite">Thermite</option>
+    <option value="hibana">Hibana</option>
+  </select>
+
+  <footer>Made by a Siege fan ❤️</footer>
+
+  <script>
+    // ===== Countdown Setup =====
+    const releaseDate = new Date("Oct 10, 2025 18:00:00").getTime(); // Example date
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = releaseDate - now;
+
+      if (distance <= 0) {
+        document.getElementById("countdown").innerHTML = "The new season is live!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    }
+
+    setInterval(updateCountdown, 1000);
+
+    // ===== Interactive Feature (Change Background by Operator) =====
+    const operatorBackgrounds = {
+      ash: "https://staticctf.akamai.net/cdn/ubisoft/mnemonic-r6/Operators/ash.png",
+      sledge: "https://staticctf.akamai.net/cdn/ubisoft/mnemonic-r6/Operators/sledge.png",
+      thermite: "https://staticctf.akamai.net/cdn/ubisoft/mnemonic-r6/Operators/thermite.png",
+      hibana: "https://staticctf.akamai.net/cdn/ubisoft/mnemonic-r6/Operators/hibana.png"
+    };
+
+    document.getElementById("operator").addEventListener("change", function() {
+      const choice = this.value;
+      if (choice && operatorBackgrounds[choice]) {
+        document.body.style.backgroundImage = `url(${operatorBackgrounds[choice]})`;
+      } else {
+        document.body.style.backgroundImage = "none";
+      }
+    });
+  </script>
+</body>
+</html>
